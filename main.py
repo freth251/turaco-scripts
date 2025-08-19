@@ -9,7 +9,6 @@ from selenium.webdriver.chrome.options import Options
 
 def new_session():
     options = Options()
-    options.binary_location = "/usr/bin/chromium-browser"
     options.add_argument('--headless')
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
@@ -28,10 +27,11 @@ def run_contact_us_test(driver):
     time.sleep(1.5) 
 
     # Wait for contact form to be visible
-    WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable((By.CLASS_NAME, "contact-form"))
+    WebDriverWait(driver, 15).until(
+        EC.visibility_of_element_located((By.CLASS_NAME, "contact-form"))
     )
-
+    
+    time.sleep(2)
     name_text_box = WebDriverWait(driver, 10).until(
         EC.element_to_be_clickable((By.ID, "name"))
     )
